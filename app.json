@@ -13,14 +13,16 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mpass21.HelloWorld"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.mpass21.HelloWorld"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -29,6 +31,15 @@
       "eas": {
         "projectId": "c33722c5-2234-44e6-9202-07833723e5d4"
       }
-    }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/c33722c5-2234-44e6-9202-07833723e5d4"
+    },
+    "plugins": [
+      "expo-web-browser"
+    ]
   }
 }

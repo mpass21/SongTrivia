@@ -1,58 +1,27 @@
-import { useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Feather } from '@expo/vector-icons';
-
-import Form from './screens/Form';
-import SettingsScreen from './screens/SettingsScreen';
+import SpotifyLogin from './screens/SpotifyLogin';
+import CallbackPage from './screens/CallbackPage';
+import { SpotifyProvider } from './SpotifyContext';
+import OnePlayerScreen from './screens/OnePlayer'; // Make sure the file exists at this path
+import TileScreen from './screens/TileScreen'; // Make sure the file exists at this path
 
 const Stack = createStackNavigator();
 
-export default function App() {
-  const [units, setUnits] = useState({
-    distance: 'km',
-    bearing: 'degrees',
-  });
-
+const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: '#007bff',
-          },
-          headerTintColor: '#fff',
-        }}
-      >
-        <Stack.Screen
-          name="form"
-          options={({ navigation }) => ({
-            title: 'Calculator',
-            headerRight: () => (
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate('settings', {
-                    currentUnits: units,
-                  })
-                }
-                style={{ marginRight: 15 }}
-              >
-                <Feather name="settings" size={24} color="black" />
-              </TouchableOpacity>
-            ),
-          })}
-        >
-          {(props) => <Form {...props} units={units} onUnitsChange={setUnits} />}
-        </Stack.Screen>
-
-        <Stack.Screen
-          name="settings"
-          options={{ title: 'Settings' }}
-        >
-          {(props) => <SettingsScreen {...props} onSave={setUnits} />}
-        </Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SpotifyProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="SpotifyLogin">
+          <Stack.Screen name="SpotifyLogin" component={SpotifyLogin} />
+          <Stack.Screen name="Callback" component={CallbackPage} />
+          <Stack.Screen name="OnePlayer" component={OnePlayerScreen} />
+          <Stack.Screen name="Tile" component={TileScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SpotifyProvider>
   );
-}
+};
+
+export default App;
